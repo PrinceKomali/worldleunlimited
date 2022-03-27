@@ -16,7 +16,7 @@ function BlankText() {
 function Credits() {
   return (
     <>
-    <small>Like what you see? Follow me on <a href="https://github.com/PrinceKomai/">Github! <img height="20px" width="20px" src="https://komali.dev/komali2Lurk.png" style={{verticalAlign: "middle"}} /></a></small><br />
+    <small>Like what you see? Follow me on <a href="https://github.com/PrinceKomali/">Github! <img height="20px" width="20px" src="https://komali.dev/komali2Lurk.png" style={{verticalAlign: "middle"}} /></a></small><br />
     <small>Full credit goes to <a href="https://github.com/teuteuf">teuteuf</a> who created the original <WORLDLE />; images and position data are taken from the <a href="https://github.com/teuteuf/worldle">repo</a></small>
     </>
   )
