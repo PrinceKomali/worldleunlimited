@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.Text {
+  font-weight: bold;
+  width: 50%;
+  max-width: 800px;
+  margin: 2px;
+  outline: none;
+  border-radius: 2px;
+  border-width: 0;
+}
+.CImg {
+  width: 20%;
+  max-width: 400px;
+  margin: 1px;
+}
+.Guess {
+  border-width: 1;
+  border-color: #00cc00;
+}
+.log {
+  width: 50%;
+  max-width: 800px;
+  display: inline-block;
+  border-radius: 2px;
+  min-height: 20px;
+  font-size: 15px;
+  text-align: center;
+  outline: 1px solid rgba(0,0,0,0.5);
+}
+.btn {
+  width: 50%;
+  max-width: 800px;
+  border-width: 2;
+  border-radius: 3px;
+  border-color: #00cc00;
+  background-color: #14d243;
+}
+.PHold {
+  width: 50%;
+  border-radius: 3px;
+  border-width:0;
+  outline: 1px solid rgba(0,0,0,0.5);
+  margin-left: 0;
+  background-color: #aaa
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+small {
+  width: 50%;
+}
