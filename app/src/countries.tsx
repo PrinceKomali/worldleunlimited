@@ -43,12 +43,6 @@ export const COUNTRIES = [
     name: "Armenia",
   },
   {
-    code: "AN",
-    latitude: 12.226079,
-    longitude: -69.060087,
-    name: "Netherlands Antilles",
-  },
-  {
     code: "AO",
     latitude: -11.202692,
     longitude: 17.873887,
@@ -545,12 +539,6 @@ export const COUNTRIES = [
     latitude: 4.860416,
     longitude: -58.93018,
     name: "Guyana",
-  },
-  {
-    code: "GZ",
-    latitude: 31.354676,
-    longitude: 34.308825,
-    name: "Gaza Strip",
   },
   {
     code: "HK",
@@ -1469,5 +1457,5 @@ export const COUNTRIES = [
     latitude: -19.015438,
     longitude: 29.154857,
     name: "Zimbabwe",
-  },
+  }
 ];

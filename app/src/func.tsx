@@ -1,10 +1,13 @@
-
+import ReactDOM from "react-dom";
 import {COUNTRIES} from "./countries";
 import {Logger} from "./logger";
+import {generateShare, popup} from "./share";
 import {COUNTRY_NUM} from "./countrygen";
 
 let done: boolean = false;
-
+let cGuessed: string[][] = [];
+let dGuessed: number[] = [];
+let aGuessed: string[] = [];
 function rad(d: number) {return (d * Math.PI)/180;}
 function deg(d: number) {return (d * 180)/Math.PI;}
 // START STACKOVERFLOW PART :) 
@@ -42,9 +45,9 @@ function angle(lat1: number, lon1:number,lat2: number, lon2: number): string {
 //END STACKOVERFLOW PART :)
 let pos: number = 0;
 function GameOver() {
-  Logger("Sorry! We were looking for: " + COUNTRIES[COUNTRY_NUM].name, "#ff5e5e")
+  Logger("Sorry! We were looking for: " + COUNTRIES[COUNTRY_NUM].name, "#ff5e5e");
+  popup(false);
 }
-
 
 function send() {
   if(done) return 0;
@@ -58,23 +61,29 @@ function send() {
   }
   
   let QCountry = COUNTRIES.find(x=>x.name.toLowerCase() == el.value.toLowerCase())!;
+  let _distance: number = distance(
+    QCountry.latitude,
+    QCountry.longitude, 
+    COUNTRIES[COUNTRY_NUM].latitude,
+    COUNTRIES[COUNTRY_NUM].longitude
+  );
+  let _angle: string = angle(
+    QCountry.latitude,
+    QCountry.longitude, 
+    COUNTRIES[COUNTRY_NUM].latitude,
+    COUNTRIES[COUNTRY_NUM].longitude
+  );
+  dGuessed.push(_distance);
+  cGuessed.push([QCountry.code, QCountry.name]);
+  aGuessed.push(_angle);
   (document.querySelectorAll(".PHold")![pos] as HTMLInputElement).value = `${title(el.value)} (${
-    distance(
-      QCountry.latitude,
-      QCountry.longitude, 
-      COUNTRIES[COUNTRY_NUM].latitude,
-      COUNTRIES[COUNTRY_NUM].longitude
-    ).toFixed(3)
+    _distance.toFixed(3)
   }km) ${
-    angle(
-      QCountry.latitude,
-      QCountry.longitude, 
-      COUNTRIES[COUNTRY_NUM].latitude,
-      COUNTRIES[COUNTRY_NUM].longitude
-    )
+    _angle
   }`;
   if(COUNTRIES[COUNTRY_NUM].name.toUpperCase() == el.value) {
-    Logger("You guessed correctly! Reload to play again!", "#5eff63");
+    Logger("You guessed correctly! Reload to play again!", "#4eef53");
+    popup(true);
     el.value = "";
     done = true;
     el.readOnly = true;
@@ -91,10 +100,10 @@ function keyPressFilter(e: {key: string}) {
 }
 function GuessButton() {
   return (
-    <button className="btn" onClick={send}>Guess</button>
+    <button className="btn btn_outline" onClick={send}>Guess</button>
   )
 }
 function GuessInput() {
   return (<input type='text' list="_list" className="Text Guess" placeholder="Input Your Guess" id="guess" onKeyDown={keyPressFilter}/>)
 }
-export {GuessButton, GuessInput}
+export {GuessButton, GuessInput, dGuessed, aGuessed, cGuessed}
