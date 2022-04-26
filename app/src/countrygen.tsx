@@ -13,7 +13,7 @@ function rmctx(e: React.MouseEvent) {
 function COUNTRY_IMG() {
   let src: string;
   let cl: string = "CImg";
-  if(["PF", "JE","FM","MH", "MP", "AQ"].includes(COUNTRIES[COUNTRY_NUM].code)){
+  if(["PF", "JE","FM","MH", "MP", "AQ", "KI"].includes(COUNTRIES[COUNTRY_NUM].code)){
     src = `https://komali.dev/countries/${COUNTRIES[COUNTRY_NUM].code.toLowerCase()}.png`;
   } else { 
     src = `https://worldle.teuteuf.fr/images/countries/${COUNTRIES[COUNTRY_NUM].code.toLowerCase()}/vector.svg`
