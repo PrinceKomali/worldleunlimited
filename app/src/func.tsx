@@ -1,7 +1,7 @@
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import {COUNTRIES} from "./countries";
 import {Logger} from "./logger";
-import {generateShare, popup} from "./share";
+import {popup} from "./share";
 import {COUNTRY_NUM} from "./countrygen";
 
 let done: boolean = false;
@@ -20,7 +20,11 @@ function distance(lat1: number,lon1: number,lat2: number,lon2: number): number{
     Math.sin(dLon/2) * Math.sin(dLon/2)
   return 12742 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));;
 }
-function title(s: string) { return s.replace( /\w\S*/g, function(t:string) { return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase(); } ); }
+function title(s: string) { 
+  return s.replace( /\S*/g, function(t:string) { 
+    return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase(); 
+  }); 
+}
 
 function angle(lat1: number, lon1:number,lat2: number, lon2: number): string {
 //borrowed from geolib, slightly modified
@@ -43,6 +47,11 @@ function angle(lat1: number, lon1:number,lat2: number, lon2: number): string {
 }
 
 //END STACKOVERFLOW PART :)
+
+function accent(a: string): string {
+  return a.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 let pos: number = 0;
 function GameOver() {
   Logger("Sorry! We were looking for: " + COUNTRIES[COUNTRY_NUM].name, "#ff5e5e");
@@ -52,15 +61,14 @@ function GameOver() {
 function send() {
   if(done) return 0;
   let el = document.getElementById("guess")! as HTMLInputElement;
-  if(!el.value || el.value.trim() == "") return
-  el.value = el.value!.trim().toUpperCase();
-  if(!COUNTRIES.map(x=>x.name.toUpperCase()).includes(el.value)) {
+  if(!el.value || el.value.trim() === "") return
+  el.value = accent(el.value!.trim()).toUpperCase();
+  if(!COUNTRIES.map(x=>accent(x.name).toUpperCase()).includes(el.value)) {
     Logger("This is not a country!", "#ebc934");
     el.value = "";
     return 0;
   }
-  
-  let QCountry = COUNTRIES.find(x=>x.name.toLowerCase() == el.value.toLowerCase())!;
+  let QCountry = COUNTRIES.find(x=>accent(x.name).toLowerCase() === accent(el.value).toLowerCase())!;
   let _distance: number = distance(
     QCountry.latitude,
     QCountry.longitude, 
@@ -76,12 +84,13 @@ function send() {
   dGuessed.push(_distance);
   cGuessed.push([QCountry.code, QCountry.name]);
   aGuessed.push(_angle);
-  (document.querySelectorAll(".PHold")![pos] as HTMLInputElement).value = `${title(el.value)} (${
+  (document.querySelectorAll(".PHold")![pos] as HTMLInputElement).value = `${title(QCountry.name)} (${
     _distance.toFixed(3)
   }km) ${
     _angle
   }`;
-  if(COUNTRIES[COUNTRY_NUM].name.toUpperCase() == el.value) {
+  
+  if(COUNTRIES[COUNTRY_NUM] === QCountry) {
     Logger("You guessed correctly! Reload to play again!", "#4eef53");
     popup(true);
     el.value = "";
@@ -91,12 +100,12 @@ function send() {
   }
   el.value = "";
   Logger(" ");
-  if(pos == 5) GameOver();
+  if(pos === 5) GameOver();
   pos++;
   
 }
 function keyPressFilter(e: {key: string}) {
-  if(e.key == "Enter") send()
+  if(e.key === "Enter") send()
 }
 function GuessButton() {
   return (

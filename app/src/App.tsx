@@ -1,8 +1,8 @@
 import React from 'react';
 import {GuessButton, GuessInput} from "./func";
-import {Log, Logger} from "./logger";
+import {Log} from "./logger";
 import {WU, WORLDLE} from "./logo";
-import {COUNTRY_NUM, COUNTRY_IMG, List} from "./countrygen";
+import {COUNTRY_IMG, List} from "./countrygen";
 import './App.css';
 function BlankText() {
   return (
@@ -16,7 +16,7 @@ function BlankText() {
 function Credits() {
   return (
     <><div className="credits">
-      <small>Like what you see? Follow me on <a href="https://github.com/PrinceKomali/">Github! <img height="20px" width="20px" src="https://komali.dev/komali2Lurk.png" style={{verticalAlign: "middle"}} /></a></small><br />
+      <small>Like what you see? Follow me on <a href="https://github.com/PrinceKomali/">Github! <img height="20px" width="20px" src="https://komali.dev/komali2Lurk.png" alt="komali2Lurk" style={{verticalAlign: "middle"}} /></a></small><br />
       <small>Full credit goes to <a href="https://github.com/teuteuf">teuteuf</a> who created the original <WORLDLE />; images and position data are taken from the <a href="https://github.com/teuteuf/worldle">repo</a></small>
     </div>
     </>

@@ -85,6 +85,12 @@ export const COUNTRIES = [
     name: "Aruba",
   },
   {
+    code: "AX",
+    latitude: 	60.116667,
+    longitude: 19.9,
+    name: "Åland Islands"
+  },
+  {
     code: "AZ",
     latitude: 40.143105,
     longitude: 47.576927,
